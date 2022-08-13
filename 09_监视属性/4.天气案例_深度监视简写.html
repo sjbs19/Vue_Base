@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天气案例_深度监视</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h2>今天天气很{{info}}</h2>
+        <button @click="Weather">点击更换天气</button>
+        <hr/>
+        
+    </div>
+</body>
+<script>
+    Vue.config.productionTip = false;
+    const vm = new Vue({
+        el:'#root',
+        data:{
+            isHost:true
+        },
+        computed:{
+            info(){
+                return this.isHost ? '炎热':'凉爽'
+            }
+        },
+        methods: {
+            Weather(){
+                this.isHost = !this.isHost
+            }
+        },
+        watch:{
+            //正常写法
+            // isHost:{
+            //     //初始化时让handler调用一下
+            //     //immediate:true,
+            //     //开启深度监视
+            //     //deep:true,
+            //     // handler什么时候调用?当isHot发生改变时。
+            //     handler(newVlaue,oldValue){
+            //         console.log('isHost被修改了',newVlaue,oldValue);
+            //     }
+            // }
+            //简写
+            // isHost(newVlaue,oldValue){
+            //     console.log('isHost被修改了',newVlaue,oldValue);
+            // }
+        }
+    })
+    //正常写法
+    // vm.$watch('isHost',{
+    //     handler(newVlaue,oldValue){
+    //         console.log('isHost被修改了',newVlaue,oldValue);
+    //     }
+    // })
+    //简写
+    vm.$watch('isHost',function(newVlaue,oldValue){
+        console.log('isHost被修改了',newVlaue,oldValue);
+    })
+   
+</script>
+</html>

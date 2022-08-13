@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>更新时的一个问题</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h2>人员列表</h2>
+        <button @click="updatamei">更新信息</button>
+        <ul>
+            <li v-for="p of persons" :key="p.id">
+                {{p.name}}-{{p.age}}-{{p.sex}}
+            </li>
+        </ul>
+        
+    </div>
+</body>
+<script>
+    Vue.config.productionTip = false;
+    //用computed实现
+    const vm = new Vue({
+        el:'#root',
+        data:{
+            persons:[
+                {id:'001',name:'马冬梅',age:30,sex:"女"},
+                {id:'002',name:'周冬雨',age:25,sex:"女"},
+                {id:'003',name:'周杰伦',age:18,sex:"男"},
+                {id:'004',name:'温兆伦',age:39,sex:"男"}
+            ],
+        },
+        methods:{
+            updatamei(){
+                // this.persons[0].name='马老师',//奏效
+                // this.persons[0].age='60',//奏效
+                // this.persons[0].sex='男'//奏效
+                // this.persons[0] = {id:'001',name:'马老师',age:60,sex:"男"}//不奏效
+
+                //push:向数组的末尾添加一个或多个元素，并返回新的长度
+                //pop:用于删除数组的最后一个元素并返回删除的元素。
+                //shift:用于把数组的第一个元素从其中删除，并返回第一个元素的值。
+                //unshift:可向数组的开头添加一个或更多元素，并返回新的长度。
+                //splice:用于添加或删除数组中的元素.
+                //参数一：必需。规定从何处添加/删除元素。该参数是开始插入和（或）删除的数组元素的下标，必须是数字。
+                //参数二：可选。规定应该删除多少元素。必须是数字，但可以是 "0"。如果未规定此参数，则删除从 index 开始到原数组结尾的所有元素。
+                //参数三：可选。要添加到数组的新元素
+                //sort:用于对数组的元素进行排序。排序顺序可以是字母或数字，并按升序或降序。默认排序顺序为按字母升序。
+                //注意：当数字是按字母顺序排列时"40"将排在"5"前面。使用数字排序，你必须通过一个函数作为参数来调用。函数指定数字是按照升序还是降序排列。
+                //注意： 这种方法会改变原始数组！
+                //reverse:用于颠倒数组中元素的顺序。
+
+                //this.persons.splice(0,1,{id:'001',name:'马老师',age:60,sex:"男"})
+                this.$set(vm.persons,0,{id:'001',name:'马老师',age:60,sex:"男"})
+            }
+        }
+        
+    })
+</script>
+</html>

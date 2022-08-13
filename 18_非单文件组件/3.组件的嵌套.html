@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件的嵌套</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+    </div>
+</body>
+<script>
+    Vue.config.productionTip = false;
+    //创建student组件
+    const student = {
+        template:`
+        <div>
+            <h2>学生姓名:{{name}}</h2>
+            <h2>学生年龄:{{age}}</h2>
+        </div>
+        `,
+        data(){
+            return {
+              name:'zs',
+              age:18,
+            }
+        }
+    }
+    //创建school组件
+    const school = {
+        template:`
+        <div>
+            <h2>学校地址:{{address}}</h2>
+            <h2>学校名称:{{schoolName}}</h2>
+            <student></student>
+        </div>
+        `,
+        data(){
+            return {
+              schoolName:'ass',
+              address:'akdhja',
+            }  
+        },
+        //注册组件
+        components:{
+            student
+        }
+    }
+    //创建hello组件
+    const hello = {
+        template:`<h1>{{msg}}</h1>`,
+        data(){
+           return {
+            msg:'你好'
+           }
+        }
+    }
+    //定义app组件
+    const app = {
+        template:`
+        <div>
+            <hello></hello>
+            <school></school>
+        </div>`,
+        components:{
+            hello,
+            school
+        }
+    }
+    //创建vm实例
+    new Vue({
+        template:`<app></app>`,
+        el:'#root',
+        //注册组件
+        components:{
+            app
+        }
+    })
+</script>
+</html>
